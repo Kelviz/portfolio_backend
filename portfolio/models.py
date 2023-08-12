@@ -32,3 +32,49 @@ class Work(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Skill(models.Model):
+    name = models.CharField(max_length=150)
+    icon = models.ImageField(upload_to="images")
+    bg_color = models.CharField(max_length=200, default="#edf2f8")
+
+    def __str__(self):
+        return self.name
+
+
+class Year(models.Model):
+    year = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.year
+
+
+class Experience(models.Model):
+    year = models.ForeignKey(Year, on_delete=models.CASCADE)
+    name = models.CharField(max_length=500)
+    company = models.CharField(max_length=500)
+    description = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.name
+
+
+class Testimonial(models.Model):
+    name = models.CharField(max_length=500)
+    company = models.CharField(max_length=500)
+    image = models.ImageField(upload_to="images")
+    feedback = models.TextField(max_length=700)
+
+    def __str__(self):
+        return self.name
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    message = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
